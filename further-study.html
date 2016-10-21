@@ -43,6 +43,8 @@
     </div>
 </div>
 
+<script src="http://code.jquery.com/jquery.js"></script>
+
 <script>
 
     var myImage = $('#coffee_image');
@@ -52,19 +54,23 @@
     var drinksOrdered = [];
 
     myImage.attr('src', "static/coffee_beans.jpg");
-    myImage.on('click', makeCoffee('brew'));
+    
     // addEventListener('click', function () { return makeCoffee("brew"); });
 
     // Append the drink_type to drinks_ordered and use console.log to view the output
-
+    console.log("hello");
     function makeCoffee(drinkType) {
         drinksOrdered.push(drinkType);
         console.log(drinksOrdered);
 
         var myRevenue = revenue();
-        myRevenueMessage.innerHTML = "Today's revenues: " + myRevenue;
+
+        myRevenueMessage.html(myRevenue);
+
+        // myRevenueMessage.innerHTML = "Today's revenues: " + myRevenue;
 
         myImage.attr('src', "static/coffee_machine.jpg");
+
          setTimeout(function() { myImage.attr('src', "static/coffee_mug.jpg"); }, 1500);
          setTimeout(function() { myImage.attr('src', "static/coffee_beans.jpg"); }, 3000);
     }
@@ -72,13 +78,17 @@
 
     // Create variables for Espresso, Latte, and Hot Chocolate;
     // and add an event listener to each that calls make_coffee
-    var espresso = document.getElementById("espresso");
-    var latte = document.getElementById("latte");
-    var hotChocolate = document.getElementById("hot-chocolate");
+    var espresso = $("#espresso");
+    var latte = $("#latte");
+    var hotChocolate = $("#hot-chocolate");
 
-    espresso.addEventListener('click', function () { return makeCoffee("espresso"); });
-    latte.addEventListener('click', function () { return makeCoffee("latte"); });
-    hotChocolate.addEventListener('click', function () { return makeCoffee("hot chocolate"); });
+    myImage.on('click', function() {makeCoffee("brew")});
+
+    espresso.on('click', function () { makeCoffee("espresso"); });
+
+    latte.on('click', function () { makeCoffee("latte"); });
+
+    hotChocolate.on('click', function () { makeCoffee("hot chocolate"); });
 
     // Use this dictionary to calculate profits for the day and log them to the console.
 
@@ -92,6 +102,8 @@
         console.log("Total revenue = " + total);
         return total;
     }
+
+    myImage.on('mouseover', function() {myImage.slideUp().slideDown()});
 
 </script>
 
